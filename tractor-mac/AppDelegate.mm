@@ -7,7 +7,8 @@
 //
 
 #import "AppDelegate.h"
-#import "HelloWorldLayer.h"
+#import "SpaceScene.h"
+#import "Ship.h"
 
 @implementation tractor_macAppDelegate
 @synthesize window=window_, glView=glView_;
@@ -29,7 +30,7 @@
 	[window_ setAcceptsMouseMovedEvents:NO];
 	
 	
-	[director runWithScene:[HelloWorldLayer scene]];
+	[director runWithScene:[SpaceScene scene]];
 }
 
 - (BOOL) applicationShouldTerminateAfterLastWindowClosed: (NSApplication *) theApplication
