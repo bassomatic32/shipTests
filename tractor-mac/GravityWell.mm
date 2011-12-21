@@ -35,6 +35,8 @@
         
         body->CreateFixture(&fixtureDef);
         
+        
+        
         // setup emitter
         
         CCParticleSystem *emitter = [[CCParticleSystemQuad alloc] initWithTotalParticles:400];

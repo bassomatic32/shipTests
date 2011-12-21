@@ -74,8 +74,9 @@
 
 -(id) thrust {
     b2Vec2 impulse;
-    float ix = cosf(body->GetAngle())*0.5f;
-    float iy = sinf(body->GetAngle())*0.5f;
+    float32 thrustPower = 0.2f;
+    float ix = cosf(body->GetAngle())*thrustPower;
+    float iy = sinf(body->GetAngle())*thrustPower;
     impulse.Set(ix,iy);
     body->ApplyLinearImpulse(impulse, body->GetWorldCenter());
     
@@ -99,8 +100,7 @@
     
     
     // angle
-    emitter.angle = 90;
-    emitter.angleVar = 14;
+    emitter.angleVar = 5;
     
     // speed of particles
     emitter.speed = 500;
@@ -135,8 +135,8 @@
     emitter.endColorVar = endColorVar;
     
     // size, in pixels
-    emitter.startSize = 35.0f;
-    emitter.startSizeVar = 4.0f;
+    emitter.startSize = 15.0f;
+    emitter.startSizeVar = 15.0f;
     emitter.endSize = 0;
     // emits per second
     emitter.emissionRate = emitter.totalParticles/emitter.life;

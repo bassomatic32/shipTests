@@ -149,6 +149,8 @@
 		4C49168A149D4DE000449AAA /* fire.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C491689149D4DE000449AAA /* fire.png */; };
 		4C49168C149D549E00449AAA /* stars.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C49168B149D549E00449AAA /* stars.png */; };
 		4C49168F149D87A800449AAA /* Ship.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4C49168E149D87A800449AAA /* Ship.mm */; };
+		4CAA3CE014A1AD8F0079A439 /* Asteroid.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4CAA3CDF14A1AD8F0079A439 /* Asteroid.mm */; };
+		4CAA3CE414A1BE620079A439 /* Shot.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CAA3CE314A1BE610079A439 /* Shot.m */; };
 		4CE7122B14A0259700123AAF /* Box2DSprite.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4CE7122A14A0259700123AAF /* Box2DSprite.mm */; };
 		4CE7123414A0542200123AAF /* GravityWell.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4CE7123314A0542200123AAF /* GravityWell.mm */; };
 /* End PBXBuildFile section */
@@ -441,6 +443,10 @@
 		4C49168B149D549E00449AAA /* stars.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stars.png; sourceTree = "<group>"; };
 		4C49168D149D87A800449AAA /* Ship.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ship.h; sourceTree = "<group>"; };
 		4C49168E149D87A800449AAA /* Ship.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Ship.mm; sourceTree = "<group>"; };
+		4CAA3CDE14A1AD8F0079A439 /* Asteroid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Asteroid.h; sourceTree = "<group>"; };
+		4CAA3CDF14A1AD8F0079A439 /* Asteroid.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Asteroid.mm; sourceTree = "<group>"; };
+		4CAA3CE214A1BE610079A439 /* Shot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shot.h; sourceTree = "<group>"; };
+		4CAA3CE314A1BE610079A439 /* Shot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Shot.m; sourceTree = "<group>"; };
 		4CE7122914A0259700123AAF /* Box2DSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Box2DSprite.h; sourceTree = "<group>"; };
 		4CE7122A14A0259700123AAF /* Box2DSprite.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Box2DSprite.mm; sourceTree = "<group>"; };
 		4CE7123214A0542200123AAF /* GravityWell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GravityWell.h; sourceTree = "<group>"; };
@@ -654,8 +660,12 @@
 		4C49149D149D378000449AAA /* tractor-mac */ = {
 			isa = PBXGroup;
 			children = (
+				4CAA3CE214A1BE610079A439 /* Shot.h */,
+				4CAA3CE314A1BE610079A439 /* Shot.m */,
 				4CE7122914A0259700123AAF /* Box2DSprite.h */,
 				4CE7122A14A0259700123AAF /* Box2DSprite.mm */,
+				4CAA3CDE14A1AD8F0079A439 /* Asteroid.h */,
+				4CAA3CDF14A1AD8F0079A439 /* Asteroid.mm */,
 				4C491632149D378400449AAA /* AppDelegate.h */,
 				4C491633149D378400449AAA /* AppDelegate.mm */,
 				4C491635149D378400449AAA /* SpaceScene.h */,
@@ -1131,6 +1141,8 @@
 				4C2BA0D0149EBD0400B7CBA5 /* b2Rope.cpp in Sources */,
 				4CE7122B14A0259700123AAF /* Box2DSprite.mm in Sources */,
 				4CE7123414A0542200123AAF /* GravityWell.mm in Sources */,
+				4CAA3CE014A1AD8F0079A439 /* Asteroid.mm in Sources */,
+				4CAA3CE414A1BE620079A439 /* Shot.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -11,7 +11,7 @@
 #import "SpaceScene.h"
 #import "Ship.h"
 #import "GravityWell.h"
-
+#import "Asteroid.h"
 
 
 
@@ -207,6 +207,11 @@ enum {
 		
         ship = [[Ship alloc] initWithLayer:self andWorld:world];
         [sprites addObject:ship];
+        
+        
+        for (int i = 0; i < 5; i++) {
+            [sprites addObject:[[Asteroid alloc] initWithLayer:self andWorld:world withScale:3]];
+        }
 		
 		
 

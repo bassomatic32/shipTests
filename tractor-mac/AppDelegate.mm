@@ -29,8 +29,10 @@
 	// Enable "moving" mouse event. Default no.
 	[window_ setAcceptsMouseMovedEvents:NO];
 	
-	
+    srandom((unsigned long) time(NULL));	
 	[director runWithScene:[SpaceScene scene]];
+    
+
 }
 
 - (BOOL) applicationShouldTerminateAfterLastWindowClosed: (NSApplication *) theApplication

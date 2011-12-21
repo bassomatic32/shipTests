@@ -23,11 +23,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "tractor-mac/SpaceScene.mm"
-         timestampString = "346052522.770086"
+         timestampString = "346142405.108364"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "309"
-         endingLineNumber = "309"
+         startingLineNumber = "314"
+         endingLineNumber = "314"
          landmarkName = "-tick:"
          landmarkType = "5">
       </FileBreakpoint>
