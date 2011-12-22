@@ -8,10 +8,15 @@
 
 #import "Box2DSprite.h"
 
-@interface Asteroid : Box2DSprite
+@interface Asteroid : Box2DSprite {
+    int _scale;
+}
 
 -(id) initWithLayer:(CCLayer *)layer andWorld:(b2World *)world withScale:(int) scale;
 
+
 -(NSArray *) split;
+
+@property int scale;
 
 @end

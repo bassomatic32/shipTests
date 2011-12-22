@@ -12,6 +12,7 @@
 #import "Ship.h"
 #import "GravityWell.h"
 #import "Asteroid.h"
+#import "Shot.h"
 
 
 
@@ -92,10 +93,34 @@ public:
         [layer addChild: emitter z:10]; // adding the emitter
         emitter.autoRemoveOnFinish = YES;
         
-        b2Body *b = contact->GetFixtureB()->GetBody();
+        b2Body *ba = contact->GetFixtureA()->GetBody();
+        b2Body *bb = contact->GetFixtureB()->GetBody();
         contact->GetFixtureB()->SetUserData(emitter);
         
-        emitter.position = CGPointMake( b->GetPosition().x * PTM_RATIO, b->GetPosition().y * PTM_RATIO);
+        emitter.position = CGPointMake( bb->GetPosition().x * PTM_RATIO, bb->GetPosition().y * PTM_RATIO);
+        
+        Asteroid *a = nil;
+        Shot *shot = nil;
+        
+        id oa = (id) ba->GetUserData();
+        id ob = (id) bb->GetUserData();
+        if (oa != nil && ob != nil) {
+            if ([oa isKindOfClass:[Asteroid class]] && [ob isKindOfClass:[Shot class]]) {
+                a = oa;
+                shot = ob;
+            }
+            if ([ob isKindOfClass:[Asteroid class]] && [oa isKindOfClass:[Shot class]]) {
+                a = ob;
+                shot = oa;
+            }
+            
+            if (a != nil) {
+                [layer indicateShotCollision:shot withAsteroid:a];
+            }
+           
+        }
+        
+        
         
         
         
@@ -144,6 +169,8 @@ enum {
         
         sprites = [[NSMutableArray alloc] init];
         gravitySource = [[NSMutableArray alloc] init];
+        shots = [[NSMutableArray alloc] init];
+        shotCollision = [[NSMutableArray alloc] init];
         
 				
 		CGSize screenSize = [CCDirector sharedDirector].winSize;
@@ -210,7 +237,7 @@ enum {
         
         
         for (int i = 0; i < 5; i++) {
-            [sprites addObject:[[Asteroid alloc] initWithLayer:self andWorld:world withScale:3]];
+            [sprites addObject:[[[Asteroid alloc] initWithLayer:self andWorld:world withScale:3]autorelease]];
         }
 		
 		
@@ -294,6 +321,18 @@ enum {
 	// Instruct the world to perform a single step of simulation. It is
 	// generally best to keep the time step and iterations fixed.
 	world->Step(dt, velocityIterations, positionIterations);
+    NSMutableArray *deadShots = [[NSMutableArray alloc] init];
+    for (Shot *s in shots) {
+        if ([s dead]) {
+            [deadShots addObject:s];
+        }
+    }
+    for (Shot *s in deadShots) {
+        
+        [shots removeObject:s];
+    }
+    [deadShots release];
+    [self processCollisions];
 
 	
 	//Iterate over the bodies in the physics world
@@ -320,7 +359,7 @@ enum {
 			b2Vec2 position = b->GetPosition();
             
 			b2Vec2 d = center - position;
-            float32 gf = 400.0f / d.LengthSquared();
+            float32 gf = (400.0f / d.LengthSquared()) * b->GetMass();
             
 			if (d.LengthSquared() < FLT_EPSILON * FLT_EPSILON)
 			{
@@ -376,6 +415,10 @@ enum {
                 [ship beginThrust];
             }
             break;
+        case 49:
+            [self addShot];
+            break;
+            
             
     }
 	return YES;
@@ -402,12 +445,35 @@ enum {
 
 -(void) addNewGravitySource:(CGPoint)p {
     
-    GravityWell *wellWorld = [[GravityWell alloc] initWithLayer:self andWorld:world atPos:p];
+    GravityWell *wellWorld = [[[GravityWell alloc] initWithLayer:self andWorld:world atPos:p] autorelease];
     [gravitySource addObject:wellWorld];
     
+}
 
+-(void) addShot {
     
+    [shots addObject:[[[Shot alloc] initWithLayer:self andWorld:world fromShip:ship] autorelease]];
     
+}
+
+-(void) indicateShotCollision:(Shot *)shot withAsteroid:(Asteroid *)asteroid {
+    NSMutableDictionary *dict = [[NSMutableDictionary alloc] init] ;
+    [dict setValue:shot forKey:@"shot"];
+    [dict setValue:asteroid forKey:@"asteroid"];
+    [shotCollision addObject:dict];
+    [dict release];
+}
+
+-(void) processCollisions {
+    for (NSDictionary *d in shotCollision) {
+        Asteroid *a =  [d objectForKey:@"asteroid"];
+        Shot *s = [d objectForKey:@"shot"];
+        [sprites addObjectsFromArray:[a split]];
+        [sprites removeObject:a];
+        [shots removeObject:s];
+        
+    }
+    [shotCollision removeAllObjects];
 }
 // on "dealloc" you need to release all your retained objects
 - (void) dealloc
@@ -421,6 +487,8 @@ enum {
 
     [sprites release];
     [gravitySource release];
+    [shots release];
+    [shotCollision release];
     
 	// don't forget to call "super dealloc"
 	[super dealloc];

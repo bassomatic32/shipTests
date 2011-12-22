@@ -7,9 +7,17 @@
 //
 
 #import "Box2DSprite.h"
+#import "Ship.h"
 
-@interface Shot : Box2DSprite
+@interface Shot : Box2DSprite {
+    time_t startTime;
+}
 
--(id) initWithLayer:(CCLayer *)layer andWorld:(id)world fromShip:(Ship *) ship;
+-(id) initWithLayer:(CCLayer *)layer andWorld:(b2World *)world fromShip:(Ship *) ship;
+
+-(BOOL) dead;
+
+
+
 
 @end

@@ -14,6 +14,8 @@
 #import "Box2D.h" 
 #import "GLES-Render.h"
 #import "Ship.h"
+#import "Shot.h"
+#import "Asteroid.h"
 
 //Pixel to metres ratio. Box2D uses metres as the unit for measurement.
 //This ratio defines how many pixels correspond to 1 Box2D "metre"
@@ -34,6 +36,9 @@
     BOOL rotateCCW;
     NSMutableArray *sprites;
     NSMutableArray *gravitySource;
+    NSMutableArray *shots;
+    
+    NSMutableArray *shotCollision;
 }
 
 // returns a CCScene that contains the HelloWorldLayer as the only child
@@ -42,5 +47,11 @@
 -(void) addNewSpriteWithCoords:(CGPoint)p;
 
 -(void) addNewGravitySource:(CGPoint) p;
+
+-(void) addShot;
+
+-(void) indicateShotCollision:(Shot *) shot withAsteroid:(Asteroid *) asteroid;
+
+-(void) processCollisions;
 
 @end

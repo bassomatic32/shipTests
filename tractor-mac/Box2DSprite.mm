@@ -24,5 +24,10 @@
     return self;
 }
 
+-(void) dealloc {
+    body->GetWorld()->DestroyBody(body);
+    
+    [super dealloc];
+}
 
 @end

@@ -11,12 +11,15 @@
 
 @implementation Asteroid
 
+@synthesize scale = _scale;
+
 -(id) initWithLayer:(CCLayer *)layer andWorld:(b2World *)world withScale:(int)scale {
     
     const float32 sizes[] = { 0.5f,1.0f,3.0f,5.0f };
     
     if (self = [super initWithLayer:layer andWorld:world]) {
         
+        _scale = scale;
         b2BodyDef bodyDef;
         bodyDef.type = b2_dynamicBody;
         
@@ -59,5 +62,20 @@
     
     return self;
 }
+
+
+-(NSArray *) split {
+    NSMutableArray *children = [[[NSMutableArray alloc] init] autorelease];
+    if (_scale > 0) {
+        for (int i = 0; i < 3; i++) {
+            Asteroid *a = [[[Asteroid alloc] initWithLayer:layer andWorld:body->GetWorld() withScale:_scale-1] autorelease];
+            a.body->SetTransform(body->GetPosition(), 0);
+            [children addObject:a];
+        }
+    }
+    
+    return children;
+}
+
 
 @end
