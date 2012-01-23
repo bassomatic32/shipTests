@@ -10,4 +10,8 @@
 
 @interface Tracker : Box2DSprite
 
+-(id) initWithLayer:(CCLayer *)layer andWorld:(b2World *)world atPoint:(CGPoint) p;
+
+-(id) track:(Box2DSprite *) object;
+
 @end

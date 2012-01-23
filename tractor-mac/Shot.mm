@@ -53,7 +53,7 @@
         shotVector.x = cosf(shipsAngle);
         shotVector.y = sinf(shipsAngle);
         shotVector.Normalize();
-        shotVector = 10.0 * shotVector;
+        shotVector = 2.0 * shotVector;
         
         
         

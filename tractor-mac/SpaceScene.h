@@ -37,6 +37,7 @@
     NSMutableArray *sprites;
     NSMutableArray *gravitySource;
     NSMutableArray *shots;
+    NSMutableArray *trackers;
     
     NSMutableArray *shotCollision;
 }

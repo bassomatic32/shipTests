@@ -54,6 +54,7 @@
 		4C2BA0CE149EBD0400B7CBA5 /* b2WeldJoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C2BA09B149EBD0300B7CBA5 /* b2WeldJoint.cpp */; };
 		4C2BA0CF149EBD0400B7CBA5 /* b2WheelJoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C2BA09D149EBD0300B7CBA5 /* b2WheelJoint.cpp */; };
 		4C2BA0D0149EBD0400B7CBA5 /* b2Rope.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C2BA0A0149EBD0300B7CBA5 /* b2Rope.cpp */; };
+		4C39CA6514C4F0510033F3C6 /* Tracker.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4C39CA6414C4F0510033F3C6 /* Tracker.mm */; };
 		4C491492149D378000449AAA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C491491149D378000449AAA /* QuartzCore.framework */; };
 		4C491494149D378000449AAA /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C491493149D378000449AAA /* OpenGL.framework */; };
 		4C491498149D378000449AAA /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C491497149D378000449AAA /* AudioToolbox.framework */; };
@@ -249,6 +250,8 @@
 		4C2BA09E149EBD0300B7CBA5 /* b2WheelJoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = b2WheelJoint.h; sourceTree = "<group>"; };
 		4C2BA0A0149EBD0300B7CBA5 /* b2Rope.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = b2Rope.cpp; sourceTree = "<group>"; };
 		4C2BA0A1149EBD0300B7CBA5 /* b2Rope.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = b2Rope.h; sourceTree = "<group>"; };
+		4C39CA6314C4F0510033F3C6 /* Tracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tracker.h; sourceTree = "<group>"; };
+		4C39CA6414C4F0510033F3C6 /* Tracker.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Tracker.mm; sourceTree = "<group>"; };
 		4C49148D149D378000449AAA /* tractor-mac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "tractor-mac.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C491491149D378000449AAA /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		4C491493149D378000449AAA /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
@@ -664,6 +667,8 @@
 				4CAA3CE314A1BE610079A439 /* Shot.mm */,
 				4CE7122914A0259700123AAF /* Box2DSprite.h */,
 				4CE7122A14A0259700123AAF /* Box2DSprite.mm */,
+				4C39CA6314C4F0510033F3C6 /* Tracker.h */,
+				4C39CA6414C4F0510033F3C6 /* Tracker.mm */,
 				4CAA3CDE14A1AD8F0079A439 /* Asteroid.h */,
 				4CAA3CDF14A1AD8F0079A439 /* Asteroid.mm */,
 				4C491632149D378400449AAA /* AppDelegate.h */,
@@ -1143,6 +1148,7 @@
 				4CE7123414A0542200123AAF /* GravityWell.mm in Sources */,
 				4CAA3CE014A1AD8F0079A439 /* Asteroid.mm in Sources */,
 				4CAA3CE414A1BE620079A439 /* Shot.mm in Sources */,
+				4C39CA6514C4F0510033F3C6 /* Tracker.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

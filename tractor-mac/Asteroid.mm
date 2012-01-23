@@ -67,7 +67,8 @@
 -(NSArray *) split {
     NSMutableArray *children = [[[NSMutableArray alloc] init] autorelease];
     if (_scale > 0) {
-        for (int i = 0; i < 3; i++) {
+        int numChildren = CCRANDOM_0_1()*3 + 1;
+        for (int i = 0; i < numChildren; i++) {
             Asteroid *a = [[[Asteroid alloc] initWithLayer:layer andWorld:body->GetWorld() withScale:_scale-1] autorelease];
             a.body->SetTransform(body->GetPosition(), 0);
             [children addObject:a];

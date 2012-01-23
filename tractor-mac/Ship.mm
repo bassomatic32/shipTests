@@ -26,7 +26,7 @@
         bodyDef.type = b2_dynamicBody;
         
         bodyDef.position.Set(10, 10);
-        bodyDef.angularDamping = 0.8f;
+        bodyDef.angularDamping = 5.8f;
         bodyDef.linearDamping = 0.0f;
         
         
@@ -62,13 +62,14 @@
 
 -(id) rotateCW {
     NSLog(@"rotate cw");
-    body->ApplyTorque(-1.0f);
+    body->ApplyAngularImpulse(-0.1f);
+    
     return self;
 }
 
 -(id) rotateCCW {
     
-    body->ApplyTorque(1.0f);
+    body->ApplyAngularImpulse(0.1f);
     return self;
 }
 

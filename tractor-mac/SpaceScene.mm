@@ -13,6 +13,7 @@
 #import "GravityWell.h"
 #import "Asteroid.h"
 #import "Shot.h"
+#import "Tracker.h"
 
 
 
@@ -28,76 +29,9 @@ public:
     void BeginContact(b2Contact *contact) {
         NSLog(@"Contact!");
         
-        CCParticleSystem *emitter;
-        if (false) {
-            emitter = (CCParticleSystem *) contact->GetFixtureB();
-        } else {
-    
-            emitter = [[CCParticleSystemQuad alloc] initWithTotalParticles:30];
-        }
-        [emitter resetSystem];
-        emitter.texture = [[CCTextureCache sharedTextureCache] addImage: @"stars.png"];
-        
-        // duration
-        //	emitter.duration = -1; //continuous effect
-        emitter.duration = 0.5;
-        
-        // gravity
-        emitter.gravity = CGPointZero;
-        
-        // angle
-        emitter.angle = 90;
-        emitter.angleVar = 360;
-        
-        // speed of particles
-        emitter.speed = 160;
-        emitter.speedVar = 20;
-        
-        // radial
-        emitter.radialAccel = -120;
-        emitter.radialAccelVar = 0;
-        
-        // tagential
-        emitter.tangentialAccel = 30;
-        emitter.tangentialAccelVar = 0;
-        
-        // life of particles
-        emitter.life = 1;
-        emitter.lifeVar = 1;
-        
-        // spin of particles
-        emitter.startSpin = 0;
-        emitter.startSpinVar = 0;
-        emitter.endSpin = 0;
-        emitter.endSpinVar = 0;
-        
-        // color of particles
-        ccColor4F startColor = {0.9f, 0.9f, 0.9f, 1.0f};
-        emitter.startColor = startColor;
-        ccColor4F startColorVar = {0.5f, 0.5f, 0.5f, 1.0f};
-        emitter.startColorVar = startColorVar;
-        ccColor4F endColor = {0.8f, 0.8f, 0.8f, 0.2f};
-        emitter.endColor = endColor;
-        ccColor4F endColorVar = {0.1f, 0.1f, 0.1f, 0.2f};
-        emitter.endColorVar = endColorVar;
-        
-        // size, in pixels
-        emitter.startSize = 20.0f;
-        emitter.startSizeVar = 10.0f;
-        emitter.endSize = kParticleStartSizeEqualToEndSize;
-        // emits per second
-        emitter.emissionRate = emitter.totalParticles/emitter.life;
-        // additive
-        emitter.blendAdditive = YES;
 
-        [layer addChild: emitter z:10]; // adding the emitter
-        emitter.autoRemoveOnFinish = YES;
-        
         b2Body *ba = contact->GetFixtureA()->GetBody();
         b2Body *bb = contact->GetFixtureB()->GetBody();
-        contact->GetFixtureB()->SetUserData(emitter);
-        
-        emitter.position = CGPointMake( bb->GetPosition().x * PTM_RATIO, bb->GetPosition().y * PTM_RATIO);
         
         Asteroid *a = nil;
         Shot *shot = nil;
@@ -171,6 +105,7 @@ enum {
         gravitySource = [[NSMutableArray alloc] init];
         shots = [[NSMutableArray alloc] init];
         shotCollision = [[NSMutableArray alloc] init];
+        trackers = [[NSMutableArray alloc] init];
         
 				
 		CGSize screenSize = [CCDirector sharedDirector].winSize;
@@ -200,31 +135,35 @@ enum {
 		// Define the ground body.
 		b2BodyDef groundBodyDef;
 		groundBodyDef.position.Set(0, 0); // bottom-left corner
+        
 		
 		// Call the body factory which allocates memory for the ground body
 		// from a pool and creates the ground box shape (also from a pool).
 		// The body is also added to the world.
 		b2Body* groundBody = world->CreateBody(&groundBodyDef);
+        
+    
 		
 		// Define the ground box shape.
 		b2EdgeShape groundBox;		
+        
 		
 		// bottom
 
 		groundBox.Set(b2Vec2(0,0), b2Vec2(screenSize.width/PTM_RATIO,0));
-		groundBody->CreateFixture(&groundBox,0);
+		groundBody->CreateFixture(&groundBox,0)->SetSensor(NO);
 		
 		// top
 		groundBox.Set(b2Vec2(0,screenSize.height/PTM_RATIO), b2Vec2(screenSize.width/PTM_RATIO,screenSize.height/PTM_RATIO));
-		groundBody->CreateFixture(&groundBox,0);
+		groundBody->CreateFixture(&groundBox,0)->SetSensor(NO);
 		
 		// left
 		groundBox.Set(b2Vec2(0,screenSize.height/PTM_RATIO), b2Vec2(0,0));
-		groundBody->CreateFixture(&groundBox,0);
+		groundBody->CreateFixture(&groundBox,0)->SetSensor(NO);
 		
 		// right
 		groundBox.Set(b2Vec2(screenSize.width/PTM_RATIO,screenSize.height/PTM_RATIO), b2Vec2(screenSize.width/PTM_RATIO,0));
-		groundBody->CreateFixture(&groundBox,0);
+		groundBody->CreateFixture(&groundBox,0)->SetSensor(NO);
 		
 		
 		//Set up sprite
@@ -274,37 +213,18 @@ enum {
 {
 	CCLOG(@"Add sprite %0.2f x %02.f",p.x,p.y);
 
-	// Define the dynamic body.
-	//Set up a 1m squared box in the physics world
-	b2BodyDef bodyDef;
-	bodyDef.type = b2_dynamicBody;
 
-	bodyDef.position.Set(p.x/PTM_RATIO, p.y/PTM_RATIO);
+    Tracker *tracker = [[Tracker alloc] initWithLayer:self andWorld:world atPoint:p];
+    [sprites addObject:tracker];
+    [trackers addObject:tracker];
+    
+    [tracker release];
+    
+    
+    
 
-	b2Body *body = world->CreateBody(&bodyDef);
-	
-	// Define another box shape for our dynamic body.
-	b2PolygonShape dynamicBox;
-	dynamicBox.SetAsBox(.5f, .5f);//These are mid points for our 1m box
-	
-	// Define the dynamic body fixture.
-	b2FixtureDef fixtureDef;
-	fixtureDef.shape = &dynamicBox;	
-	fixtureDef.density = 1.0f;
-	fixtureDef.friction = 0.3f;
-    fixtureDef.restitution = 0.7f;
-    
-	body->CreateFixture(&fixtureDef);
-    
-    
-//    b2RopeJointDef jointDef;
-//    jointDef.bodyA = ship.body;
-//    jointDef.bodyB = body;
-//    jointDef.maxLength = 5;
-//    
-//    
-//    world->CreateJoint(&jointDef);
 }
+
 
 
 
@@ -334,6 +254,9 @@ enum {
     [deadShots release];
     [self processCollisions];
 
+    for (Tracker *t in trackers) {
+        [t track:ship];
+    }
 	
 	//Iterate over the bodies in the physics world
 	for (b2Body* b = world->GetBodyList(); b; b = b->GetNext())
@@ -399,9 +322,11 @@ enum {
 	return YES;
 }
 
+
+
 -(BOOL) ccKeyDown:(NSEvent *)event
 {
-	//NSLog(@"key down: %d", [event keyCode] );
+	NSLog(@"key down: %d", [event keyCode] );
     short keyCode = [event keyCode];
     switch (keyCode) {
         case 124: rotateCW = YES;
@@ -489,6 +414,7 @@ enum {
     [gravitySource release];
     [shots release];
     [shotCollision release];
+    [trackers release];
     
 	// don't forget to call "super dealloc"
 	[super dealloc];
