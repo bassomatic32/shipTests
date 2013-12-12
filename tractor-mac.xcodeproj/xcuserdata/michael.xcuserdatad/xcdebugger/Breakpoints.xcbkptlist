@@ -121,11 +121,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "tractor-mac/Asteroid.mm"
-         timestampString = "346286133.152974"
+         timestampString = "396154606.830189"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "72"
-         endingLineNumber = "72"
+         startingLineNumber = "89"
+         endingLineNumber = "89"
          landmarkName = "-split"
          landmarkType = "5">
       </FileBreakpoint>
@@ -183,6 +183,45 @@
          startingLineNumber = "394"
          endingLineNumber = "394"
          landmarkName = "-processCollisions"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "tractor-mac/Asteroid.mm"
+         timestampString = "396154606.830189"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "52"
+         endingLineNumber = "52"
+         landmarkName = "-initWithLayer:andWorld:withScale:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "tractor-mac/Asteroid.mm"
+         timestampString = "396154288.787218"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "48"
+         endingLineNumber = "48"
+         landmarkName = "-initWithLayer:andWorld:withScale:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "tractor-mac/Asteroid.mm"
+         timestampString = "396154291.307697"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "47"
+         endingLineNumber = "47"
+         landmarkName = "-initWithLayer:andWorld:withScale:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

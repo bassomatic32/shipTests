@@ -151,6 +151,8 @@
     
     [layer addChild:emitter];
     
+    [emitter release];
+    
     thrust = emitter;    
     return self;
 }

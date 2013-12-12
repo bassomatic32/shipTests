@@ -15,7 +15,7 @@
 
 -(id) initWithLayer:(CCLayer *)layer andWorld:(b2World *)world withScale:(int)scale {
     
-    const float32 sizes[] = { 0.5f,1.0f,3.0f,5.0f };
+    const float32 sizes[] = { 1.0f,1.5f,3.0f,5.0f };
     
     if (self = [super initWithLayer:layer andWorld:world]) {
         
@@ -35,14 +35,31 @@
         
         
         body = world->CreateBody(&bodyDef);    
+
+        float32 verts = 8;
+        float32 inc = M_PI * 2 / verts;
+        
+        b2Vec2 vertices[8];
+        int v = 0;
+        for (float32 theta = 0; theta < (M_PI*2); theta += inc,v++) {
+            float32 x = cosf(theta)*sizes[scale] * (fabsf(CCRANDOM_0_1())+0.5f);
+            float32 y = sinf(theta)*sizes[scale]* (fabsf(CCRANDOM_0_1())+0.5f);
+            vertices[v].Set(x,y);
+        }
+        
+        b2PolygonShape polygon;
+        
+        polygon.Set(vertices, (int) verts);
+
+
+        
+
         body->SetUserData(self);
         
-        b2CircleShape circle;
-        circle.m_radius = sizes[scale];
         
         // Define the dynamic body fixture.
         b2FixtureDef fixtureDef;
-        fixtureDef.shape = &circle;	
+        fixtureDef.shape = &polygon;
         fixtureDef.density = 1.0f;
         fixtureDef.friction = 0.3f;
         fixtureDef.restitution = 0.7f;

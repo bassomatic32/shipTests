@@ -55,15 +55,15 @@
         emitter.angleVar = 190;
         
         // speed of particles
-        emitter.speed = 98;
+        emitter.speed = 0;
         emitter.speedVar = 19.3;
         
         // radial
-        emitter.radialAccel = 0;
+        emitter.radialAccel = 300;
         emitter.radialAccelVar = 0;
         
         // tagential
-        emitter.tangentialAccel = 0;
+        emitter.tangentialAccel = 300;
         emitter.tangentialAccelVar = 0;
         
         // life of particles
